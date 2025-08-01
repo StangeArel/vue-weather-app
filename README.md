@@ -1,29 +1,15 @@
-# .
+# 🌦️ Vue Weather App
 
-This template should help get you started developing with Vue 3 in Vite.
+Ein einfaches und modernes Wetter-Frontend, entwickelt mit **Vue 3** und **Vite**.  
+Die App zeigt aktuelle Wetterdaten übersichtlich an – schnell, responsiv und elegant umgesetzt.
 
-## Recommended IDE Setup
+---
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## 🛠️ Projekt Setup
 
-## Customize configuration
+### 📦 Abhängigkeiten installieren
 
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
+```bash
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
 npm run build
-```
