@@ -13,6 +13,26 @@ export default {
     cityName() {
       return "✻" + this.city + "✻";
     },
+    showTemp() {
+      return this.info
+        ? `Temperatur in ${this.city}: + ${this.info.main.temp} °C`
+        : "";
+    },
+    showFeelsLike() {
+      return this.info
+        ? `Gefühlte Temperatur: ${this.info.main.feels_like} °C`
+        : "";
+    },
+    showMinTemp() {
+      return this.info
+        ? `Minimale Temperatur: ${this.info.main.temp_min} °C`
+        : "";
+    },
+    showMaxTemp() {
+      return this.info
+        ? `Maximale Temperatur: ${this.info.main.temp_max} °C`
+        : "";
+    },
   },
   methods: {
     getWeather() {
@@ -50,11 +70,17 @@ export default {
     <button v-if="city != ''" @click="getWeather()">Wetter anzeigen</button>
     <button v-else disabled>Stadt eingeben, um das Wetter zu sehen</button>
     <p class="error">{{ error }}</p>
-    <p v-show="info != null" style="color: brown">
-      <b
-        ><u>{{ info.main.temp }} °C in {{ city }}</u></b
-      >
-    </p>
+
+    <div v-show="info != null" style="color: brown">
+      <p>
+        <b
+          ><u>{{ showTemp }}</u></b
+        >
+      </p>
+      <p>{{ showFeelsLike }}</p>
+      <p>{{ showMinTemp }}</p>
+      <p>{{ showMaxTemp }}</p>
+    </div>
   </div>
 </template>
 
