@@ -10,8 +10,13 @@ export default {
     };
   },
   computed: {
+    formattedCityName() {
+      if (!this.city) return "";
+      const trimmed = this.city.trim().toLowerCase();
+      return trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
+    },
     cityName() {
-      return "✻" + this.city + "✻";
+      return "✻" + this.formattedCityName + "✻";
     },
     showTemp() {
       return this.info
@@ -61,9 +66,7 @@ export default {
     <p>
       Erfahre das aktuelle Wetter in
       <b
-        ><u>{{
-          city == "" ? "Deiner Stadt ⛅️" : cityName.toUpperCase()
-        }}</u></b
+        ><u>{{ city == "" ? "Deiner Stadt ⛅️" : cityName }}</u></b
       >
     </p>
     <input v-model="city" type="text" placeholder="Gib deine Stadt ein" />
@@ -71,7 +74,7 @@ export default {
     <button v-else disabled>Stadt eingeben, um das Wetter zu sehen</button>
     <p class="error">{{ error }}</p>
 
-    <div v-show="info != null" style="color: brown">
+    <div v-if="info != null" style="color: brown">
       <p>
         <b
           ><u>{{ showTemp }}</u></b
