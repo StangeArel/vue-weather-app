@@ -12,8 +12,8 @@ export default {
 <template>
   <div class="wrapper">
     <h1>Wetter-App</h1>
-    <p>Erfahre das aktuelle Wetter in {{ city }} Stadt.</p>
-    <input v-on:input="this.city = $event.target.value" type="text" placeholder="Gib deine Stadt ein" />
+    <p>Erfahre das aktuelle Wetter in {{ city == "" ? "Deiner Stadt ⛅️" : city }}</p>
+    <input v-model="city" type="text" placeholder="Gib deine Stadt ein" />
     <button>Wetter anzeigen</button>
     <p>Hier wird das Wetter angezeigt.</p>
   </div>
@@ -26,8 +26,18 @@ export default {
   border-radius: 50px;
   background: linear-gradient(339deg, rgba(137, 248, 250, 0.804) 0%, rgba(197, 146, 190, 0.901) 100%);
   padding: 20px;
-text-align: center;
-color: #036014;
+  text-align: center;
+  color: #036014;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  margin: 50px auto;
+  font-family: 'Arial', sans-serif;
+  font-size: 18px;
+  transition: background 0.5s ease;
 }
 
 .wrapper h1 {
@@ -39,8 +49,9 @@ color: #036014;
 }
 
 .wrapper input {
-margin-top: 30px;
-background: transparent;
+  margin-top: 30px;
+  background: transparent;
+  text-align: center;
   border: 0;
   border-bottom: 2px solid #110813;
   color: #860a6f;
@@ -50,18 +61,20 @@ background: transparent;
 }
 
 .wrapper input:focus {
-  border-bottom-color: #6e3d7d;
+  border-bottom-color: #b105e6;
 }
 
 .wrapper button {
-  background: #e3bc4b;
-  color: #531c02;
+  background: #ddc16d;
+  color: #9c0e97;
   border-radius: 10px;
   border: 2px solid #b99935;
   padding: 10px 15px;
   margin-left: 20px;
   cursor: pointer;
   transition: transform 500ms ease;
+  margin-top: 20px;
+  font-size: 16px;
 }
 
 .wrapper button:hover {
