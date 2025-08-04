@@ -9,6 +9,11 @@ export default {
     cityName() {
       return "✻" + this.city + "✻"
     }
+  },
+  methods: {
+    getWeather() {
+      alert("Some weather API call would go here for " + this.city);
+    }
   }
 }
 
@@ -19,7 +24,7 @@ export default {
     <h1>Wetter-App</h1>
     <p>Erfahre das aktuelle Wetter in {{ city == "" ? "Deiner Stadt ⛅️" : cityName }}</p>
     <input v-model="city" type="text" placeholder="Gib deine Stadt ein" />
-    <button v-if="city != ''">Wetter anzeigen</button>
+    <button v-if="city != ''" @click="getWeather()">Wetter anzeigen</button>
     <button v-else disabled>Stadt eingeben, um das Wetter zu sehen</button>
     <p>Hier wird das Wetter angezeigt.</p>
   </div>
