@@ -14,7 +14,7 @@ export default {
     <h1>Wetter-App</h1>
     <p>Erfahre das aktuelle Wetter in {{ city == "" ? "Deiner Stadt ⛅️" : city }}</p>
     <input v-model="city" type="text" placeholder="Gib deine Stadt ein" />
-    <button>Wetter anzeigen</button>
+    <button v-show="city != ''">Wetter anzeigen</button>
     <p>Hier wird das Wetter angezeigt.</p>
   </div>
 </template>
