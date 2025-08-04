@@ -4,6 +4,11 @@ export default {
     return {
       city: ""
     };
+  },
+  computed: {
+    cityName() {
+      return "✻" + this.city + "✻"
+    }
   }
 }
 
@@ -12,9 +17,10 @@ export default {
 <template>
   <div class="wrapper">
     <h1>Wetter-App</h1>
-    <p>Erfahre das aktuelle Wetter in {{ city == "" ? "Deiner Stadt ⛅️" : city }}</p>
+    <p>Erfahre das aktuelle Wetter in {{ city == "" ? "Deiner Stadt ⛅️" : cityName }}</p>
     <input v-model="city" type="text" placeholder="Gib deine Stadt ein" />
-    <button v-show="city != ''">Wetter anzeigen</button>
+    <button v-if="city != ''">Wetter anzeigen</button>
+    <button v-else disabled>Stadt eingeben, um das Wetter zu sehen</button>
     <p>Hier wird das Wetter angezeigt.</p>
   </div>
 </template>
@@ -75,6 +81,12 @@ export default {
   transition: transform 500ms ease;
   margin-top: 20px;
   font-size: 16px;
+}
+
+.wrapper button:disabled {
+  background: #ccc;
+  color: #666;
+  cursor: not-allowed;
 }
 
 .wrapper button:hover {
