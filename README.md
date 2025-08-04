@@ -5,7 +5,7 @@ Die App zeigt aktuelle Wetterdaten übersichtlich an – schnell und elegant umg
 
 
 # 🖼️ Vorschau
-<img src="./src/imgs/WetterApp.png" alt="Vorschau der Wetter-App" width="600"/>
+![Vorschau der Wetter-App](./src/imgs/WetterApp.png)
 
 ---
 
