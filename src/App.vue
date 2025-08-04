@@ -2,31 +2,43 @@
 export default {
   data() {
     return {
-      city: ""
+      city: "",
+      error: "",
     };
   },
   computed: {
     cityName() {
-      return "✻" + this.city + "✻"
-    }
+      return "✻" + this.city + "✻";
+    },
   },
   methods: {
     getWeather() {
-      alert("Some weather API call would go here for " + this.city);
-    }
-  }
-}
-
+      if (this.city.trim().length < 2) {
+        this.error = "Bitte gib eine gültige Stadt ein.";
+        setTimeout(() => {
+          this.error = ""; // nach z. B. 3 Sekunden automatisch wieder löschen
+        }, 2500);
+        return false;
+      }
+      this.error = "";
+      alert("Wetterdaten werden geladen für: " + this.city);
+    },
+  },
+};
 </script>
 
 <template>
   <div class="wrapper">
     <h1>Wetter-App</h1>
-    <p>Erfahre das aktuelle Wetter in {{ city == "" ? "Deiner Stadt ⛅️" : cityName }}</p>
+    <p>
+      Erfahre das aktuelle Wetter in
+      {{ city == "" ? "Deiner Stadt ⛅️" : cityName }}
+    </p>
     <input v-model="city" type="text" placeholder="Gib deine Stadt ein" />
     <button v-if="city != ''" @click="getWeather()">Wetter anzeigen</button>
     <button v-else disabled>Stadt eingeben, um das Wetter zu sehen</button>
     <p>Hier wird das Wetter angezeigt.</p>
+    <p class="error">{{ error }}</p>
   </div>
 </template>
 
@@ -35,7 +47,11 @@ export default {
   width: 900px;
   height: 500px;
   border-radius: 50px;
-  background: linear-gradient(339deg, rgba(137, 248, 250, 0.804) 0%, rgba(197, 146, 190, 0.901) 100%);
+  background: linear-gradient(
+    339deg,
+    rgba(137, 248, 250, 0.804) 0%,
+    rgba(197, 146, 190, 0.901) 100%
+  );
   padding: 20px;
   text-align: center;
   color: #036014;
@@ -46,7 +62,7 @@ export default {
   text-align: center;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   margin: 50px auto;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   font-size: 18px;
   transition: background 0.5s ease;
 }
@@ -96,5 +112,13 @@ export default {
 
 .wrapper button:hover {
   transform: scale(1.1) translateY(-5px);
+}
+
+.error {
+  color: red;
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 16px;
+  transition: color 0.3s ease;
 }
 </style>
