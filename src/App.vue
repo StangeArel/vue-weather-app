@@ -1,9 +1,12 @@
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
       city: "",
       error: "",
+      info: null,
     };
   },
   computed: {
@@ -16,11 +19,16 @@ export default {
       if (this.city.trim().length < 2) {
         this.error = "Bitte gib eine gültige Stadt ein.";
         setTimeout(() => {
-          this.error = ""; // nach z. B. 3 Sekunden automatisch wieder löschen
+          this.error = "";
         }, 2500);
         return false;
       }
       this.error = "";
+      axios
+        .get(
+          `https://api.openweathermap.org/data/2.5/weather?q=${this.city}&units=metric&appid=a2df5f4957cd5aefcf16fff215d98e6f`
+        )
+        .then((res) => (this.info = res.data));
       alert("Wetterdaten werden geladen für: " + this.city);
     },
   },
@@ -32,13 +40,21 @@ export default {
     <h1>Wetter-App</h1>
     <p>
       Erfahre das aktuelle Wetter in
-      {{ city == "" ? "Deiner Stadt ⛅️" : cityName }}
+      <b
+        ><u>{{
+          city == "" ? "Deiner Stadt ⛅️" : cityName.toUpperCase()
+        }}</u></b
+      >
     </p>
     <input v-model="city" type="text" placeholder="Gib deine Stadt ein" />
     <button v-if="city != ''" @click="getWeather()">Wetter anzeigen</button>
     <button v-else disabled>Stadt eingeben, um das Wetter zu sehen</button>
-    <p>Hier wird das Wetter angezeigt.</p>
     <p class="error">{{ error }}</p>
+    <p v-show="info != null" style="color: brown">
+      <b
+        ><u>{{ info.main.temp }} °C in {{ city }}</u></b
+      >
+    </p>
   </div>
 </template>
 
@@ -69,6 +85,8 @@ export default {
 
 .wrapper h1 {
   margin-top: 50px;
+  color: #ad1d92;
+  font-family: 20px;
 }
 
 .wrapper p {
@@ -82,7 +100,7 @@ export default {
   border: 0;
   border-bottom: 2px solid #110813;
   color: #860a6f;
-  font-size: 14px;
+  font-size: 18px;
   padding: 5px 8px;
   outline: none;
 }
